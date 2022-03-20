@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  postgres:
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - type: bind
+        source: ./tools
+        target: /tools
+      - type: tmpfs
+        target: /edbvolume
+
+  inventory-management-api:
+    image: "localhost:5000/inventory-management-api:latest"
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    cap_add: [ "SYS_ADMIN" ]
+    environment:
+      - SERVER_PORT=8080
+    volumes:
+      - ./tools:/tools
+
+  inventory-management-ui:
+    image: "localhost:5000/inventory-management-ui:latest"
+    ports:
+      - "8085:3000"
+    volumes:
+      - ./tools:/tools

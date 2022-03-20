@@ -1,0 +1,28 @@
+---
+replicaCount: 1
+
+app:
+  namespace: inventorymanagement
+  local_deployment: true
+  kong:
+    enabled: true
+    path: "/inventory-api"
+
+image:
+  repository:
+    "localhost:5000/inventory-management-api"
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+ingress:
+  enabled: false
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []

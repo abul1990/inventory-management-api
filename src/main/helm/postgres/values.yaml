@@ -1,0 +1,31 @@
+---
+app:
+  namespace: inventorymanagement
+  replicaCount: 1
+
+postgres:
+  replicas: 1
+  user: postgres
+  password: postgres
+  db: postgres
+  pgdata: /var/lib/postgresql/data/pgdata
+  containerport: 5432
+  volume:
+    size: 1Gi
+  serviceport:
+    name: pgql
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+    nodePort: 30432
+
+image:
+  repository: "localhost:5000/postgres"
+  postgres_tag: "latest"
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+
+service:
+  type: LoadBalancer
+  port: 80
+
