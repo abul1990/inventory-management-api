@@ -32,3 +32,14 @@ jobs:
       run: chmod +x gradlew
     - name: Build
       run: ./gradlew bootJar
+      
+  create_dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Publish Docker
+        uses: elgohr/Publish-Docker-Github-Action@2.14
+        with:
+          name: abulassan/inventory-management:latest
+          username: abulassan
+          password: Abul@1990
