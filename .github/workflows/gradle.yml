@@ -29,5 +29,4 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Build with Gradle
-    - run: chmod +x gradlew
-    - run: ./gradlew bootJar
+      run: chmod +x gradlew ./gradlew build 
