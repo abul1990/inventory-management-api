@@ -44,4 +44,4 @@ jobs:
           name: abulassan/inventory-management:latest
           username: abulassan
           password: Abul@1990
-          buildContext: inventory-management-api
+          context: .
