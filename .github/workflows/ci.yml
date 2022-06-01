@@ -78,7 +78,18 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-artifacts         
+          name: build-artifacts  
+          
+      
+
+      - name: setting docker version
+        id: github
+        run: |
+          IFS=-
+          set -- `git describe --long --tags --dirty --always`
+          version=`basename $1``date '+%s'`
+          echo "Version:$version"
+          echo  "::set-output name=tag_version::$version"
       
       - name: Build Docker Image
         run: |
