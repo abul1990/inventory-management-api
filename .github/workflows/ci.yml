@@ -37,10 +37,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            service/build/*
-            client/build/*
-            client/test/*
-            sonar-project.properties
+            src/build/*
           retention-days: 5
           
   sonar:
