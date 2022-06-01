@@ -96,7 +96,7 @@ jobs:
           version=`basename $1``date '+%s'`
           echo "Version:$version"
           echo  "::set-output name=tag_version::$version"
-          echo "DOCKER_TAG=$version" >> $GITHUB_ENV
+          echo "DOCKER_TAG=$version"
           
     
           
