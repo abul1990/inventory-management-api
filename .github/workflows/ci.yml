@@ -96,9 +96,26 @@ jobs:
           echo "Version:$version"
           echo  "::set-output name=tag_version::$version"
           
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            docker.io/${{ github.repository }}
+            ghcr.io/${{ github.repository }}
+            quay.io/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          flavor: |
+            latest=true
+          
       
       - name: Build Docker Image
         run: |
+          echo "tag:" ${{ steps.meta.outputs.tags }}
+          echo "tag:" ${{ steps.meta.outputs.labels }}
           docker build -t inventory-management-api-ci:latest .
     
 
