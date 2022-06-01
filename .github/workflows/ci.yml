@@ -85,7 +85,7 @@ jobs:
         run: |
           IFS=-
           set -- git describe --long --tags --dirty --always
-          version=basename $1``date '+%s'
+          version=basename $1 date '+%s'
           echo "Version:$version"
           echo  "::set-output name=tag_version::$version"
       
