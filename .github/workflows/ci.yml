@@ -37,7 +37,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            src/build/*
+            build/*
           retention-days: 5
           
   sonar:
