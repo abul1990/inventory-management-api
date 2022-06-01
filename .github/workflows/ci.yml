@@ -78,9 +78,7 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-artifacts  
-          
-      
+          name: build-artifacts         
 
       - name: setting docker version
         id: github
