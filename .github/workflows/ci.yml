@@ -78,18 +78,12 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build-artifacts
-
-      
+          name: build-artifacts         
       - name: Set Docker Tag Name
         with:
           name: build-artifacts
           path: |
             build/*
-      
-      
-      
-
       - name: Build Docker Image
         run: |
           docker build -t inventory-management-api-ci:latest .
