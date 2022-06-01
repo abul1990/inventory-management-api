@@ -42,6 +42,33 @@ jobs:
             client/test/*
             sonar-project.properties
           retention-days: 5
+          
+  sonar:
+    name: Sonar Scan
+    runs-on: [ self-hosted, kubernetes, on-prem ]
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        
+      - name: SonarQube Quality Gate check
+        continue-on-error: true
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        # Force to fail step after specific time
+        timeout-minutes: 5
+        
+
+      - name: Result of sonarqube scan
+        run: |
+          echo "Report is available"
 
 
 # name: Java CI with Gradle
