@@ -109,13 +109,23 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
           flavor: |
-            latest=true
+            latest=false
           
-      
+      - name: Extract Metadata for Docker
+        id: docker_metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: http//:inventory/
+          flavor: |
+            latest=false
+          tags: |
+            type=${{ env.DOCKER_TAG }}
+            
       - name: Build Docker Image
         run: |
           echo "tag:" ${{ steps.meta.outputs.tags }}
-          echo "tag:" ${{ steps.meta.outputs.labels }}
+          echo "etag:" ${{ steps.docker_metadata.outputs.tags }}
+          echo "dtag:" ${{ env.DOCKER_TAG }}
           docker build -t inventory-management-api-ci:latest .
     
 
