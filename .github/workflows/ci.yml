@@ -82,8 +82,10 @@ jobs:
 
       
       - name: Set Docker Tag Name
-        run: |
-          echo "DOCKER_TAG=latest"
+        with:
+          name: build-artifacts
+          path: |
+            build/*
       
       
       
