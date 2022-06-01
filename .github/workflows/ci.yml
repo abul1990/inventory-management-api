@@ -123,7 +123,7 @@ jobs:
             
       - name: Build Docker Image
         run: |
-          echo "tag 1:" ${{ steps.meta.outputs.tags }}
+          
           echo "tag 2:" ${{ steps.docker_metadata.outputs.tags }}
           echo "tag 3:" ${{ env.DOCKER_TAG }}
           docker build -t inventory-management-api-ci:latest .
