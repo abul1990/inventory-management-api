@@ -82,8 +82,6 @@ jobs:
       - name: Set Docker Tag Name
         with:
           name: build-artifacts
-          path: |
-            build/*
       - name: Build Docker Image
         run: |
           docker build -t inventory-management-api-ci:latest .
