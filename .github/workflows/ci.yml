@@ -106,7 +106,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=${{ env.DOCKER_TAG }}
+            ${{ env.DOCKER_TAG }}
             
       - name: Build Docker Image
         run: |
