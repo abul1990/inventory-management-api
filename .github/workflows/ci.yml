@@ -88,13 +88,19 @@ jobs:
         if: (!startsWith(github.ref, 'refs/tags/'))
         run: |
           echo "DOCKER_TAG=sha" >> $GITHUB_ENV
+      - name: setting docker version
+        run: |
+          IFS=-
+          set -- `git describe --long --tags --dirty --always`
+          version=`basename $1``date '+%s'`
+          echo "Version:$version"
+          echo  "::set-output name=tag_version::$version"
+          
       
       - name: Build Docker Image
         run: |
           docker build -t inventory-management-api-ci:latest .
     
-
-
 
 # name: Java CI with Gradle
 
