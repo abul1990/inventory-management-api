@@ -80,14 +80,14 @@ jobs:
         with:
           name: build-artifacts         
 
-      - name: setting docker version
-        id: github
+      - name: Set Docker Tag Name
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
-          IFS=-
-          set -- git describe --long --tags --dirty --always
-          version=basename $1 '+%s'
-          echo "Version:$version"
-          echo  "::set-output name=tag_version::$version"
+          echo "DOCKER_TAG=ref,event=tag" >> $GITHUB_ENV
+      - name: Set Docker Tag Name
+        if: (!startsWith(github.ref, 'refs/tags/'))
+        run: |
+          echo "DOCKER_TAG=sha" >> $GITHUB_ENV
       
       - name: Build Docker Image
         run: |
