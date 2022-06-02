@@ -1,8 +1,7 @@
 FROM openjdk:11
 
-RUN addgroup -S spring && adduser -S springuser -G spring
-USER springuser
-WORKDIR /home/springuser
+
+WORKDIR /home
 
 ARG JAR_FILE=build/libs/inventory-management-0.0.1-SNAPSHOT.jar
 
