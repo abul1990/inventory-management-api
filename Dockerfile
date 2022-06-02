@@ -3,7 +3,7 @@ FROM openjdk:11
 
 WORKDIR /home
 
-ARG JAR_FILE=build/libs/inventory-management-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=build/libs/*.jar
 
 COPY ${JAR_FILE} app.jar
 
